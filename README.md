@@ -1,18 +1,50 @@
-# EasySubtitles
+# EzSubtitles
 
-本地离线自动字幕 + SRT 校对工具 MVP。
+EzSubtitles is a local, offline subtitle generator with powerful  `.srt` editing functions, powered by [`faster-whisper`](https://github.com/SYSTRAN/faster-whisper).
 
-## 功能
+The programme enable users to **automatically** generate subtitles **locally**, review and proofread them **quickly**, and export a clean `.srt` file **without uploading the media to an online service.**
 
-- 启动时自动打开导入窗口，拖拽或导入视频/音频后自动生成字幕
-- 使用本地 `faster-whisper` 模型生成中英文字幕
-- 左侧显示视频画面或音频波形
-- 媒体下方实时预览当前字幕
-- 简易编辑轨道：时间坐标轴、字幕块、时间点标记、拖动字幕开始/结束并吸附到标记或相邻字幕边界
-- 右侧字幕列表：点击跳转、编辑文本、上下箭头切换、Enter 确认
-- 导出 `.srt`
+It is suggested to use the released version for individual users.
 
-## 安装
+## Limitations
+
+- The programme is developed and tested on `MacOS`; thus it will likely fail on `Windows`.
+- The interface is currently only available in `Chinese`.
+
+## Features
+
+- Utilizes the local `faster-whisper` model to generate `Chinese` and `English` subtitles offline; Provides a ~~through~~ developing  GUI for editing.
+- Automatically opens *a file picker* from Finder when the app launches. Another plausible option for importing media is *drag and drop*.
+- Displays video playback on the upper left, with the current subtitle shown below the media preview.
+- Provides a simple editing timeline on the left below, with:
+  - current playback position
+  - subtitle blocks
+  - time markers
+  - draggable subtitle start/end points
+  - snapping to markers and neighbouring subtitle boundaries
+- Shows all subtitles in a table on the right.
+- Supports keyboard-driven review:
+  - `Enter`: edit or confirm the current subtitle. Use `Command + Enter` during the text edit to return.
+  - `Up` `Down`: move between subtitle rows, automatically jump to the start of the new subtitle row.
+  - `Left` `Right`: jump to the start or end of the current subtitle
+  - `Command + E`: export `.srt`  
+  
+  **advanced repair functions**
+  - `Option + C`: split subtitle at text cursor, using current playback/video position as the timing boundary.
+    - The first block includes the contents before the cursor, starting at the start position of the original block and ends at the current playback position.
+    - The second block includes the contents behind the cursor, starting at the current playback position and ends at the end position of the original block.
+  - `Option + M`: merge the selected consecutive subtitles into one block.
+- Exports subtitles as `.srt`.
+
+## Release
+
+Release builds are intended to include the dependencies and the `faster-whisper` model. Users who download a release should be able to run the app without manually installing Python packages or downloading the model.  
+* **The releases are usually several versions behind the code; thus they are more stable.**  
+* For now, release builds only target `MacOS`.
+
+## Install
+
+Create a virtual environment, and install dependencies:
 
 ```bash
 python3 -m venv .venv
@@ -20,23 +52,30 @@ python3 -m venv .venv
 pip install -r requirements.txt
 ```
 
-`faster-whisper` 是离线推理库，但模型文件需要提前下载到本机。推荐把模型放到项目内 `models/small`，或者启动时指定模型目录：
+Install `ffmpeg` if it is not already available:
 
 ```bash
-EASYSUB_MODEL=/Users/gordon/models/faster-whisper-small python -m easysubtitles
+brew install ffmpeg
 ```
 
-注意：`pip list` 里有 `faster-whisper` 只代表转写库已经安装，不代表 Whisper 模型文件已经在本地。为了保持离线，应用不会默认用 `small`、`medium` 这类模型名触发联网下载。
+## Model Setup
+- Installing `faster-whisper` with `pip` successfully does not mean the model has been downloaded or placed in the correct location.
 
-需要系统安装 `ffmpeg`，用于从视频中抽取音频和生成波形数据。
+For local development, place the model at:
 
-## 运行
+```text
+models/small
+```
+
+Alternatively, point EzSubtitles to a local model directory with `EASYSUB_MODEL`:
+
+```bash
+EASYSUB_MODEL=/Users/your-name/models/faster-whisper-small python -m easysubtitles
+```
+
+## Run From Source
 
 ```bash
 . .venv/bin/activate
 python -m easysubtitles
 ```
-
-## 备注
-
-如果没有安装 `faster-whisper` 或没有可用模型，应用仍可打开并生成一条占位字幕，方便测试 GUI 校对流程。
