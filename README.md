@@ -13,6 +13,7 @@ It is suggested to use the released version for individual users.
 
 ## Features
 
+image [https://github.com/user-attachments/assets/756c1343-d61f-4e57-9f59-6d222eba0a77]
 - Utilizes the local `faster-whisper` model to generate `Chinese` and `English` subtitles offline; Provides a ~~through~~ developing  GUI for editing.
 - Automatically opens *a file picker* from Finder when the app launches. Another plausible option for importing media is *drag and drop*.
 - Displays video playback on the upper left, with the current subtitle shown below the media preview.
