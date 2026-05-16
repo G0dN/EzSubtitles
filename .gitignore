@@ -1,0 +1,43 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+*.spec
+
+# Local media and generated subtitles
+*.srt
+*.vtt
+*.ass
+*.mp4
+*.mov
+*.m4v
+*.mkv
+*.avi
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.opus
+
+# Local model assets are distributed via releases, not source control.
+models/
