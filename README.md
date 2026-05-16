@@ -2,7 +2,7 @@
 
 EzSubtitles is a local, offline subtitle generator with powerful  `.srt` editing functions, powered by [`faster-whisper`](https://github.com/SYSTRAN/faster-whisper).
 
-The programme enable users to **automatically** generate subtitles **locally**, review and proofread them **quickly**, and export a clean `.srt` file **without uploading the media to an online service.**
+The programme enables users to **automatically** generate subtitles **locally**, review and proofread them **conveniently**, and export a clean `.srt` file **without uploading the media to an online service.**
 
 It is suggested to use the released version for individual users.
 
